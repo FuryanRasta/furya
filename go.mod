@@ -28,7 +28,9 @@ require (
 	google.golang.org/grpc v1.49.0
 	google.golang.org/protobuf v1.28.1
 	gopkg.in/yaml.v2 v2.4.0
-	github.com/confio/tgrade v1.0.1
+	github.com/confio/tgrade/app/upgrades/v3
+	github.com/confio/tgrade/app/upgrades/v2
+	github.com/confio/tgrade/app/upgrades	
 
 )
 
