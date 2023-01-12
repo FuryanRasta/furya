@@ -1,4 +1,4 @@
-module github.com/furyanrasta/furya
+module github.com/confio/tgrade
 
 go 1.18
 
