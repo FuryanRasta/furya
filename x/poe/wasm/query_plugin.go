@@ -8,9 +8,9 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	abcitypes "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/confio/tgrade/x/poe/contract"
-	"github.com/confio/tgrade/x/poe/keeper"
-	"github.com/confio/tgrade/x/poe/types"
+	"github.com/furyanrasta/furya/x/poe/contract"
+	"github.com/furyanrasta/furya/x/poe/keeper"
+	"github.com/furyanrasta/furya/x/poe/types"
 )
 
 type ViewKeeper interface {
@@ -147,7 +147,7 @@ type PoEContractAddressQuery struct {
 	ContractType string `json:"contract_type"`
 }
 
-type TgradeQuery struct {
+type FuryaQuery struct {
 	PoEContractAddress *PoEContractAddressQuery `json:"poe_contract_address,omitempty"`
 	ValidatorVotes     *struct{}                `json:"validator_votes,omitempty"`
 }
@@ -168,9 +168,9 @@ type ValidatorVote struct {
 
 func CustomQuerier(poeKeeper ViewKeeper) func(ctx sdk.Context, request json.RawMessage) ([]byte, error) {
 	return func(ctx sdk.Context, request json.RawMessage) ([]byte, error) {
-		var contractQuery TgradeQuery
+		var contractQuery FuryaQuery
 		if err := json.Unmarshal(request, &contractQuery); err != nil {
-			return nil, sdkerrors.Wrap(err, "tgrade query")
+			return nil, sdkerrors.Wrap(err, "furya query")
 		}
 
 		switch {
@@ -205,7 +205,7 @@ func handleValidatorVotesQuery(poeKeeper ViewKeeper) ([]byte, error) {
 	return bz, nil
 }
 
-func handlePoEContractAddressQuery(ctx sdk.Context, contractQuery TgradeQuery, poeKeeper ViewKeeper) ([]byte, error) {
+func handlePoEContractAddressQuery(ctx sdk.Context, contractQuery FuryaQuery, poeKeeper ViewKeeper) ([]byte, error) {
 	ctype := types.PoEContractTypeFrom(contractQuery.PoEContractAddress.ContractType)
 
 	addr, err := poeKeeper.GetPoEContractAddress(ctx, ctype)

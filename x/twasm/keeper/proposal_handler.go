@@ -7,7 +7,7 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 
-	"github.com/confio/tgrade/x/twasm/types"
+	"github.com/furyanrasta/furya/x/twasm/types"
 )
 
 // govKeeper is a subset of Keeper that is needed for the gov proposal handling

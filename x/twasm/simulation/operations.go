@@ -12,8 +12,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 
-	"github.com/confio/tgrade/app/params"
-	poetypes "github.com/confio/tgrade/x/poe/types"
+	"github.com/furyanrasta/furya/app/params"
+	poetypes "github.com/furyanrasta/furya/x/poe/types"
 )
 
 // Simulation operation weights constants
@@ -86,7 +86,7 @@ func WeightedOperations(
 		),
 		simulation.NewWeightedOperation(
 			weightMsgInstantiateContract,
-			wasmsimulation.SimulateMsgInstantiateContract(ak, bk, wasmKeeper, TgradeSimulationCodeIDSelector),
+			wasmsimulation.SimulateMsgInstantiateContract(ak, bk, wasmKeeper, FuryaSimulationCodeIDSelector),
 		),
 		simulation.NewWeightedOperation(
 			weightMsgExecuteContract,
@@ -94,7 +94,7 @@ func WeightedOperations(
 				ak,
 				bk,
 				wasmKeeper,
-				TgradeSimulationExecuteContractSelector,
+				FuryaSimulationExecuteContractSelector,
 				wasmsimulation.DefaultSimulationExecuteSenderSelector,
 				wasmsimulation.DefaultSimulationExecutePayloader,
 			),
@@ -102,8 +102,8 @@ func WeightedOperations(
 	}
 }
 
-// TgradeSimulationCodeIDSelector picks the first code id with unrestricted permission
-func TgradeSimulationCodeIDSelector(ctx sdk.Context, wasmKeeper wasmsimulation.WasmKeeper) uint64 {
+// FuryaSimulationCodeIDSelector picks the first code id with unrestricted permission
+func FuryaSimulationCodeIDSelector(ctx sdk.Context, wasmKeeper wasmsimulation.WasmKeeper) uint64 {
 	var codeID uint64
 	wasmKeeper.IterateCodeInfos(ctx, func(u uint64, info wasmtypes.CodeInfo) bool {
 		if info.InstantiateConfig.Permission != wasmtypes.AccessTypeEverybody ||
@@ -116,8 +116,8 @@ func TgradeSimulationCodeIDSelector(ctx sdk.Context, wasmKeeper wasmsimulation.W
 	return codeID
 }
 
-// TgradeSimulationExecuteContractSelector picks the first non PoE contract address
-func TgradeSimulationExecuteContractSelector(ctx sdk.Context, wasmKeeper wasmsimulation.WasmKeeper) sdk.AccAddress {
+// FuryaSimulationExecuteContractSelector picks the first non PoE contract address
+func FuryaSimulationExecuteContractSelector(ctx sdk.Context, wasmKeeper wasmsimulation.WasmKeeper) sdk.AccAddress {
 	var r sdk.AccAddress
 	wasmKeeper.IterateContractInfo(ctx, func(address sdk.AccAddress, info wasmtypes.ContractInfo) bool {
 		if info.CodeID < uint64(len(poetypes.PoEContractType_name)-1) { // skip all PoE contracts

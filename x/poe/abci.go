@@ -7,11 +7,11 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/confio/tgrade/x/poe/contract"
-	"github.com/confio/tgrade/x/poe/keeper"
-	"github.com/confio/tgrade/x/poe/types"
-	"github.com/confio/tgrade/x/twasm"
-	twasmtypes "github.com/confio/tgrade/x/twasm/types"
+	"github.com/furyanrasta/furya/x/poe/contract"
+	"github.com/furyanrasta/furya/x/poe/keeper"
+	"github.com/furyanrasta/furya/x/poe/types"
+	"github.com/furyanrasta/furya/x/twasm"
+	twasmtypes "github.com/furyanrasta/furya/x/twasm/types"
 )
 
 type endBlockKeeper interface {

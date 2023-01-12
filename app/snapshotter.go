@@ -9,25 +9,25 @@ import (
 	"github.com/CosmWasm/wasmd/x/wasm/keeper"
 )
 
-var _ snapshot.ExtensionSnapshotter = &TgradeSnapshotter{}
+var _ snapshot.ExtensionSnapshotter = &FuryaSnapshotter{}
 
-// TgradeSnapshotter custom cosmos-sdk snapshotter that extends
+// FuryaSnapshotter custom cosmos-sdk snapshotter that extends
 // the wasmd snapshotter to restore poe contract cache
-type TgradeSnapshotter struct {
+type FuryaSnapshotter struct {
 	*keeper.WasmSnapshotter
-	app *TgradeApp
+	app *FuryaApp
 }
 
-// NewTgradeSnapshotter constructor
-func NewTgradeSnapshotter(app *TgradeApp, cms sdk.MultiStore, wasm *keeper.Keeper) *TgradeSnapshotter {
-	return &TgradeSnapshotter{
+// NewFuryaSnapshotter constructor
+func NewFuryaSnapshotter(app *FuryaApp, cms sdk.MultiStore, wasm *keeper.Keeper) *FuryaSnapshotter {
+	return &FuryaSnapshotter{
 		WasmSnapshotter: keeper.NewWasmSnapshotter(cms, wasm),
 		app:             app,
 	}
 }
 
 // Restore restores wasm files and caches
-func (t *TgradeSnapshotter) Restore(
+func (t *FuryaSnapshotter) Restore(
 	height uint64, format uint32, protoReader protoio.Reader,
 ) (snapshot.SnapshotItem, error) {
 	item, err := t.WasmSnapshotter.Restore(height, format, protoReader)

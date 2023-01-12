@@ -3,7 +3,7 @@ package keeper
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/confio/tgrade/x/poe/types"
+	"github.com/furyanrasta/furya/x/poe/types"
 )
 
 // HistoricalEntries = number of historical info entries

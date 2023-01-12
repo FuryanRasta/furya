@@ -26,17 +26,17 @@ import (
 	cfg "github.com/tendermint/tendermint/config"
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	appparams "github.com/confio/tgrade/app/params"
-	"github.com/confio/tgrade/x/poe"
-	"github.com/confio/tgrade/x/poe/client/cli"
-	"github.com/confio/tgrade/x/poe/types"
-	twasmkeeper "github.com/confio/tgrade/x/twasm/keeper"
+	appparams "github.com/furyanrasta/furya/app/params"
+	"github.com/furyanrasta/furya/x/poe"
+	"github.com/furyanrasta/furya/x/poe/client/cli"
+	"github.com/furyanrasta/furya/x/poe/types"
+	twasmkeeper "github.com/furyanrasta/furya/x/twasm/keeper"
 )
 
 const (
 	myChainID      = "testing"
 	myKey          = "myKey"
-	bondDenum      = "utgd"
+	bondDenum      = "ufury"
 	initialBalance = 100
 )
 
@@ -47,20 +47,20 @@ func TestGenTxCmd(t *testing.T) {
 		expErr              bool
 	}{
 		"stake liquid": {
-			liquidStakingAmount: "1utgd",
-			vestedStakingAmount: "0utgd",
+			liquidStakingAmount: "1ufury",
+			vestedStakingAmount: "0ufury",
 		},
 		"stake vested": {
-			liquidStakingAmount: "0utgd",
-			vestedStakingAmount: "1utgd",
+			liquidStakingAmount: "0ufury",
+			vestedStakingAmount: "1ufury",
 		},
 		"stake both": {
-			liquidStakingAmount: "1utgd",
-			vestedStakingAmount: "1utgd",
+			liquidStakingAmount: "1ufury",
+			vestedStakingAmount: "1ufury",
 		},
 		"staked more than balance": {
-			liquidStakingAmount: "101utgd",
-			vestedStakingAmount: "0utgd",
+			liquidStakingAmount: "101ufury",
+			vestedStakingAmount: "0ufury",
 			expErr:              true,
 		},
 	}

@@ -13,16 +13,16 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/tendermint/tendermint/libs/rand"
 
-	"github.com/confio/tgrade/x/poe/contract"
-	"github.com/confio/tgrade/x/poe/keeper/poetesting"
-	"github.com/confio/tgrade/x/poe/types"
+	"github.com/furyanrasta/furya/x/poe/contract"
+	"github.com/furyanrasta/furya/x/poe/keeper/poetesting"
+	"github.com/furyanrasta/furya/x/poe/types"
 )
 
 func TestStakingValidatorDelegations(t *testing.T) {
 	var myOperatorAddr sdk.AccAddress = rand.Bytes(address.Len)
 
 	poeKeeper := PoEKeeperMock{
-		GetBondDenomFn: func(ctx sdk.Context) string { return "utgd" },
+		GetBondDenomFn: func(ctx sdk.Context) string { return "ufury" },
 	}
 
 	specs := map[string]struct {
@@ -44,7 +44,7 @@ func TestStakingValidatorDelegations(t *testing.T) {
 						ValidatorAddress: myOperatorAddr.String(),
 						Shares:           sdk.OneDec(),
 					},
-					Balance: sdk.NewCoin("utgd", sdk.NewInt(10)),
+					Balance: sdk.NewCoin("ufury", sdk.NewInt(10)),
 				},
 			}},
 		},
@@ -192,7 +192,7 @@ func TestStakingParams(t *testing.T) {
 			require.Equal(t, types.PoEContractTypeValset, ctype)
 			return myStakingContract, nil
 		},
-		GetBondDenomFn:      func(ctx sdk.Context) string { return "utgd" },
+		GetBondDenomFn:      func(ctx sdk.Context) string { return "ufury" },
 		HistoricalEntriesFn: func(ctx sdk.Context) uint32 { return 1 },
 		StakeContractFn: func(ctx sdk.Context) StakeContract {
 			return poetesting.StakeContractMock{QueryStakingUnbondingPeriodFn: func(ctx sdk.Context) (time.Duration, error) {
@@ -215,7 +215,7 @@ func TestStakingParams(t *testing.T) {
 			MaxValidators:     2,
 			MaxEntries:        0,
 			HistoricalEntries: 1,
-			BondDenom:         "utgd",
+			BondDenom:         "ufury",
 		},
 	}
 	assert.Equal(t, exp, gotRes)

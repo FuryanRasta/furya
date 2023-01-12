@@ -1,8 +1,8 @@
 # Contracts
-Tgrade smart contracts. See https://github.com/confio/tgrade-contracts for source code and details.
+Furya smart contracts. See https://github.com/furyanrasta/furya-contracts for source code and details.
 
-![Arch with Gov](https://github.com/confio/tgrade-contracts/blob/main/docs/Architecture.md)
-[Architecture](https://github.com/confio/tgrade-contracts/blob/main/docs/Architecture.md)
+![Arch with Gov](https://github.com/furyanrasta/furya-contracts/blob/main/docs/Architecture.md)
+[Architecture](https://github.com/furyanrasta/furya-contracts/blob/main/docs/Architecture.md)
 
 ## Developers
 ### Test strategy

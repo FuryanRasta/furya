@@ -15,8 +15,8 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/tendermint/tendermint/libs/rand"
 
-	"github.com/confio/tgrade/x/poe/keeper"
-	"github.com/confio/tgrade/x/poe/types"
+	"github.com/furyanrasta/furya/x/poe/keeper"
+	"github.com/furyanrasta/furya/x/poe/types"
 )
 
 func TestDeductFeeDecorator(t *testing.T) {

@@ -13,8 +13,8 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/tendermint/tendermint/libs/rand"
 
-	"github.com/confio/tgrade/x/poe/contract"
-	"github.com/confio/tgrade/x/poe/keeper/poetesting"
+	"github.com/furyanrasta/furya/x/poe/contract"
+	"github.com/furyanrasta/furya/x/poe/keeper/poetesting"
 )
 
 func TestDelegatorValidators(t *testing.T) {

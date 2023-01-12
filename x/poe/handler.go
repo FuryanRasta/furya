@@ -5,8 +5,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
-	"github.com/confio/tgrade/x/poe/keeper"
-	"github.com/confio/tgrade/x/poe/types"
+	"github.com/furyanrasta/furya/x/poe/keeper"
+	"github.com/furyanrasta/furya/x/poe/types"
 )
 
 // NewHandler constructor

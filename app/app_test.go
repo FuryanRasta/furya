@@ -21,15 +21,15 @@ import (
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 	db "github.com/tendermint/tm-db"
 
-	poetypes "github.com/confio/tgrade/x/poe/types"
+	poetypes "github.com/furyanrasta/furya/x/poe/types"
 )
 
 // default empty opts = nil
 var emptyWasmOpts []wasm.Option
 
-func TestTgradeExport(t *testing.T) {
+func TestFuryaExport(t *testing.T) {
 	db := db.NewMemDB()
-	gapp := NewTgradeApp(log.NewTMLogger(log.NewSyncWriter(os.Stdout)), db, nil, true, map[int64]bool{}, DefaultNodeHome, 0, MakeEncodingConfig(), EmptyBaseAppOptions{}, emptyWasmOpts)
+	gapp := NewFuryaApp(log.NewTMLogger(log.NewSyncWriter(os.Stdout)), db, nil, true, map[int64]bool{}, DefaultNodeHome, 0, MakeEncodingConfig(), EmptyBaseAppOptions{}, emptyWasmOpts)
 	genesisState := NewDefaultGenesisState()
 
 	setupWithSingleValidatorGenTX(t, genesisState)
@@ -47,7 +47,7 @@ func TestTgradeExport(t *testing.T) {
 	gapp.Commit()
 
 	// Making a new app object with the db, so that initchain hasn't been called
-	newGapp := NewTgradeApp(log.NewTMLogger(log.NewSyncWriter(os.Stdout)), db, nil, true, map[int64]bool{}, DefaultNodeHome, 0, MakeEncodingConfig(), EmptyBaseAppOptions{}, emptyWasmOpts)
+	newGapp := NewFuryaApp(log.NewTMLogger(log.NewSyncWriter(os.Stdout)), db, nil, true, map[int64]bool{}, DefaultNodeHome, 0, MakeEncodingConfig(), EmptyBaseAppOptions{}, emptyWasmOpts)
 
 	_, err = newGapp.ExportAppStateAndValidators(false, []string{})
 	require.NoError(t, err, "ExportAppStateAndValidators should not have an error")
@@ -118,7 +118,7 @@ func setupWithSingleValidatorGenTX(t *testing.T, genesisState GenesisState) {
 // ensure that blocked addresses are properly set in bank keeper
 func TestBlockedAddrs(t *testing.T) {
 	db := db.NewMemDB()
-	gapp := NewTgradeApp(log.NewTMLogger(log.NewSyncWriter(os.Stdout)), db, nil, true, map[int64]bool{}, DefaultNodeHome, 0, MakeEncodingConfig(), EmptyBaseAppOptions{}, emptyWasmOpts)
+	gapp := NewFuryaApp(log.NewTMLogger(log.NewSyncWriter(os.Stdout)), db, nil, true, map[int64]bool{}, DefaultNodeHome, 0, MakeEncodingConfig(), EmptyBaseAppOptions{}, emptyWasmOpts)
 
 	for acc := range maccPerms {
 		t.Run(acc, func(t *testing.T) {
@@ -136,7 +136,7 @@ func TestGetMaccPerms(t *testing.T) {
 
 func TestIBCKeeperLazyInitialization(t *testing.T) {
 	db := db.NewMemDB()
-	gapp := NewTgradeApp(log.NewTMLogger(log.NewSyncWriter(os.Stdout)), db, nil, true, map[int64]bool{}, DefaultNodeHome, 0, MakeEncodingConfig(), EmptyBaseAppOptions{}, emptyWasmOpts)
+	gapp := NewFuryaApp(log.NewTMLogger(log.NewSyncWriter(os.Stdout)), db, nil, true, map[int64]bool{}, DefaultNodeHome, 0, MakeEncodingConfig(), EmptyBaseAppOptions{}, emptyWasmOpts)
 	genesisState := NewDefaultGenesisState()
 	setupWithSingleValidatorGenTX(t, genesisState)
 

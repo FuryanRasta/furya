@@ -28,25 +28,25 @@ var (
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-// TgradeContractDetails is a custom extension to the wasmd ContractInfo
-type TgradeContractDetails struct {
+// FuryaContractDetails is a custom extension to the wasmd ContractInfo
+type FuryaContractDetails struct {
 	RegisteredPrivileges []RegisteredPrivilege `protobuf:"bytes,1,rep,name=registered_privileges,json=registeredPrivileges,proto3" json:"registered_privileges"`
 }
 
-func (m *TgradeContractDetails) Reset()         { *m = TgradeContractDetails{} }
-func (m *TgradeContractDetails) String() string { return proto.CompactTextString(m) }
-func (*TgradeContractDetails) ProtoMessage()    {}
-func (*TgradeContractDetails) Descriptor() ([]byte, []int) {
+func (m *FuryaContractDetails) Reset()         { *m = FuryaContractDetails{} }
+func (m *FuryaContractDetails) String() string { return proto.CompactTextString(m) }
+func (*FuryaContractDetails) ProtoMessage()    {}
+func (*FuryaContractDetails) Descriptor() ([]byte, []int) {
 	return fileDescriptor_cbb24c05a9eda05e, []int{0}
 }
 
-func (m *TgradeContractDetails) XXX_Unmarshal(b []byte) error {
+func (m *FuryaContractDetails) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
 
-func (m *TgradeContractDetails) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *FuryaContractDetails) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_TgradeContractDetails.Marshal(b, m, deterministic)
+		return xxx_messageInfo_FuryaContractDetails.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -57,19 +57,19 @@ func (m *TgradeContractDetails) XXX_Marshal(b []byte, deterministic bool) ([]byt
 	}
 }
 
-func (m *TgradeContractDetails) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_TgradeContractDetails.Merge(m, src)
+func (m *FuryaContractDetails) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_FuryaContractDetails.Merge(m, src)
 }
 
-func (m *TgradeContractDetails) XXX_Size() int {
+func (m *FuryaContractDetails) XXX_Size() int {
 	return m.Size()
 }
 
-func (m *TgradeContractDetails) XXX_DiscardUnknown() {
-	xxx_messageInfo_TgradeContractDetails.DiscardUnknown(m)
+func (m *FuryaContractDetails) XXX_DiscardUnknown() {
+	xxx_messageInfo_FuryaContractDetails.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_TgradeContractDetails proto.InternalMessageInfo
+var xxx_messageInfo_FuryaContractDetails proto.InternalMessageInfo
 
 // RegisteredPrivilege stores position and privilege name
 type RegisteredPrivilege struct {
@@ -116,7 +116,7 @@ func (m *RegisteredPrivilege) XXX_DiscardUnknown() {
 var xxx_messageInfo_RegisteredPrivilege proto.InternalMessageInfo
 
 func init() {
-	proto.RegisterType((*TgradeContractDetails)(nil), "confio.twasm.v1beta1.TgradeContractDetails")
+	proto.RegisterType((*FuryaContractDetails)(nil), "confio.twasm.v1beta1.FuryaContractDetails")
 	proto.RegisterType((*RegisteredPrivilege)(nil), "confio.twasm.v1beta1.RegisteredPrivilege")
 }
 
@@ -149,14 +149,14 @@ var fileDescriptor_cbb24c05a9eda05e = []byte{
 	0x01, 0x00, 0x00,
 }
 
-func (this *TgradeContractDetails) Equal(that interface{}) bool {
+func (this *FuryaContractDetails) Equal(that interface{}) bool {
 	if that == nil {
 		return this == nil
 	}
 
-	that1, ok := that.(*TgradeContractDetails)
+	that1, ok := that.(*FuryaContractDetails)
 	if !ok {
-		that2, ok := that.(TgradeContractDetails)
+		that2, ok := that.(FuryaContractDetails)
 		if ok {
 			that1 = &that2
 		} else {
@@ -207,7 +207,7 @@ func (this *RegisteredPrivilege) Equal(that interface{}) bool {
 	return true
 }
 
-func (m *TgradeContractDetails) Marshal() (dAtA []byte, err error) {
+func (m *FuryaContractDetails) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -217,12 +217,12 @@ func (m *TgradeContractDetails) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *TgradeContractDetails) MarshalTo(dAtA []byte) (int, error) {
+func (m *FuryaContractDetails) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *TgradeContractDetails) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *FuryaContractDetails) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -291,7 +291,7 @@ func encodeVarintContractExtension(dAtA []byte, offset int, v uint64) int {
 	return base
 }
 
-func (m *TgradeContractDetails) Size() (n int) {
+func (m *FuryaContractDetails) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -330,7 +330,7 @@ func sozContractExtension(x uint64) (n int) {
 	return sovContractExtension(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
 
-func (m *TgradeContractDetails) Unmarshal(dAtA []byte) error {
+func (m *FuryaContractDetails) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -353,10 +353,10 @@ func (m *TgradeContractDetails) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: TgradeContractDetails: wiretype end group for non-group")
+			return fmt.Errorf("proto: FuryaContractDetails: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: TgradeContractDetails: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: FuryaContractDetails: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:

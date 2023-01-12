@@ -13,8 +13,8 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/confio/tgrade/x/poe/contract"
-	"github.com/confio/tgrade/x/poe/types"
+	"github.com/furyanrasta/furya/x/poe/contract"
+	"github.com/furyanrasta/furya/x/poe/types"
 )
 
 // PoEKeeper is a subset of the keeper

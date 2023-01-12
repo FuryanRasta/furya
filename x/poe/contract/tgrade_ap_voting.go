@@ -19,7 +19,7 @@ type APVotingInitMsg struct {
 }
 
 // APVotingExecute ap-voting contract execute messages
-// See https://github.com/confio/tgrade-contracts/blob/v0.9.0/contracts/tgrade-ap-voting/src/msg.rs
+// See https://github.com/furyanrasta/furya-contracts/blob/v0.9.0/contracts/furya-ap-voting/src/msg.rs
 type APVotingExecute struct {
 	Propose           *Propose           `json:"propose,omitempty"`
 	Vote              *VoteProposal      `json:"vote,omitempty"`

@@ -35,12 +35,12 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 	dbm "github.com/tendermint/tm-db"
 
-	"github.com/confio/tgrade/app"
-	appparams "github.com/confio/tgrade/app/params"
-	"github.com/confio/tgrade/x/poe/client/cli"
+	"github.com/furyanrasta/furya/app"
+	appparams "github.com/furyanrasta/furya/app/params"
+	"github.com/furyanrasta/furya/x/poe/client/cli"
 )
 
-// fees limit in tgd
+// fees limit in fury
 const maxFees = 100
 
 // NewRootCmd creates a new root command for wasmd. It is called once in the
@@ -70,7 +70,7 @@ func NewRootCmd() (*cobra.Command, appparams.EncodingConfig) {
 
 	rootCmd := &cobra.Command{
 		Use:   version.AppName,
-		Short: "Tgrade Daemon (server)",
+		Short: "Furya Daemon (server)",
 		PersistentPreRunE: func(cmd *cobra.Command, _ []string) error {
 			// set the default command outputs
 			cmd.SetOut(cmd.OutOrStdout())
@@ -82,7 +82,7 @@ func NewRootCmd() (*cobra.Command, appparams.EncodingConfig) {
 			}
 
 			if areFeesTooHigh(cmd) {
-				return fmt.Errorf("are you really really sure that you want to send this amount of fees? CLI is preventing fees higher than %dtgd", maxFees)
+				return fmt.Errorf("are you really really sure that you want to send this amount of fees? CLI is preventing fees higher than %dfury", maxFees)
 			}
 
 			initClientCtx, err = config.ReadFromClientConfig(initClientCtx)
@@ -240,7 +240,7 @@ func (ac appCreator) newApp(
 		panic(err)
 	}
 	var emptyWasmOpts []wasm.Option
-	return app.NewTgradeApp(
+	return app.NewFuryaApp(
 		logger,
 		db,
 		traceStore,
@@ -274,7 +274,7 @@ func (ac appCreator) appExport(
 	jailAllowedAddrs []string,
 	appOpts servertypes.AppOptions,
 ) (servertypes.ExportedApp, error) {
-	var tgradeApp *app.TgradeApp
+	var furyaApp *app.FuryaApp
 	homePath, ok := appOpts.Get(flags.FlagHome).(string)
 	if !ok || homePath == "" {
 		return servertypes.ExportedApp{}, errors.New("application home is not set")
@@ -282,7 +282,7 @@ func (ac appCreator) appExport(
 
 	loadLatest := height == -1
 	var emptyWasmOpts []wasm.Option
-	tgradeApp = app.NewTgradeApp(
+	furyaApp = app.NewFuryaApp(
 		logger,
 		db,
 		traceStore,
@@ -296,12 +296,12 @@ func (ac appCreator) appExport(
 	)
 
 	if height != -1 {
-		if err := tgradeApp.LoadHeight(height); err != nil {
+		if err := furyaApp.LoadHeight(height); err != nil {
 			return servertypes.ExportedApp{}, err
 		}
 	}
 
-	return tgradeApp.ExportAppStateAndValidators(forZeroHeight, jailAllowedAddrs)
+	return furyaApp.ExportAppStateAndValidators(forZeroHeight, jailAllowedAddrs)
 }
 
 // extendUnsafeResetAllCmd - also clear wasm dir
@@ -366,13 +366,13 @@ func addJsomOutputFlag(cmd *cobra.Command) *cobra.Command {
 }
 
 // registerDenoms registers human coin type
-// 1tgd = 1000000 utgd
+// 1fury = 1000000 ufury
 func registerDenoms() {
 	err := sdk.RegisterDenom(app.HumanCoinUnit, sdk.OneDec())
 	if err != nil {
 		panic(err)
 	}
-	err = sdk.RegisterDenom(app.BaseCoinUnit, sdk.NewDecWithPrec(1, app.TgdExponent))
+	err = sdk.RegisterDenom(app.BaseCoinUnit, sdk.NewDecWithPrec(1, app.FuryExponent))
 	if err != nil {
 		panic(err)
 	}

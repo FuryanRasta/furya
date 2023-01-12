@@ -18,8 +18,8 @@ import (
 	"github.com/spf13/cobra"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/confio/tgrade/x/globalfee/client/cli"
-	"github.com/confio/tgrade/x/globalfee/types"
+	"github.com/furyanrasta/furya/x/globalfee/client/cli"
+	"github.com/furyanrasta/furya/x/globalfee/types"
 )
 
 var (

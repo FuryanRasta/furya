@@ -10,9 +10,9 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/tendermint/tendermint/libs/rand"
 
-	"github.com/confio/tgrade/x/poe"
-	"github.com/confio/tgrade/x/poe/contract"
-	"github.com/confio/tgrade/x/poe/types"
+	"github.com/furyanrasta/furya/x/poe"
+	"github.com/furyanrasta/furya/x/poe/contract"
+	"github.com/furyanrasta/furya/x/poe/types"
 )
 
 func TestQueryWithdrawableFunds(t *testing.T) {
@@ -64,9 +64,9 @@ func TestQueryWithdrawableFunds(t *testing.T) {
 			require.NoError(t, gotErr)
 
 			if spec.expRewards {
-				assert.True(t, gotAmount.IsGTE(sdk.NewCoin("utgd", sdk.OneInt())))
+				assert.True(t, gotAmount.IsGTE(sdk.NewCoin("ufury", sdk.OneInt())))
 			} else {
-				assert.Equal(t, sdk.NewCoin("utgd", sdk.ZeroInt()), gotAmount)
+				assert.Equal(t, sdk.NewCoin("ufury", sdk.ZeroInt()), gotAmount)
 			}
 		})
 	}

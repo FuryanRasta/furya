@@ -3,7 +3,7 @@
 package twasm
 
 import (
-	"github.com/confio/tgrade/x/twasm/types"
+	"github.com/furyanrasta/furya/x/twasm/types"
 )
 
 const (

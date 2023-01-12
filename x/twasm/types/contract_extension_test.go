@@ -7,21 +7,21 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestTgradeContractDetailsValidation(t *testing.T) {
+func TestFuryaContractDetailsValidation(t *testing.T) {
 	specs := map[string]struct {
-		src    TgradeContractDetails
+		src    FuryaContractDetails
 		expErr bool
 	}{
 		"all good": {
-			src: TgradeContractDetailsFixture(t),
+			src: FuryaContractDetailsFixture(t),
 		},
 		"empty callbacks": {
-			src: TgradeContractDetailsFixture(t, func(d *TgradeContractDetails) {
+			src: FuryaContractDetailsFixture(t, func(d *FuryaContractDetails) {
 				d.RegisteredPrivileges = nil
 			}),
 		},
 		"multiple callbacks": {
-			src: TgradeContractDetailsFixture(t, func(d *TgradeContractDetails) {
+			src: FuryaContractDetailsFixture(t, func(d *FuryaContractDetails) {
 				d.RegisteredPrivileges = []RegisteredPrivilege{
 					{Position: 1, PrivilegeType: "begin_blocker"},
 					{Position: 1, PrivilegeType: "end_blocker"},
@@ -29,7 +29,7 @@ func TestTgradeContractDetailsValidation(t *testing.T) {
 			}),
 		},
 		"duplicate callbacks": {
-			src: TgradeContractDetailsFixture(t, func(d *TgradeContractDetails) {
+			src: FuryaContractDetailsFixture(t, func(d *FuryaContractDetails) {
 				d.RegisteredPrivileges = []RegisteredPrivilege{
 					{Position: 1, PrivilegeType: "begin_blocker"},
 					{Position: 2, PrivilegeType: "begin_blocker"},
@@ -38,25 +38,25 @@ func TestTgradeContractDetailsValidation(t *testing.T) {
 			expErr: true,
 		},
 		"unknown callback": {
-			src: TgradeContractDetailsFixture(t, func(d *TgradeContractDetails) {
+			src: FuryaContractDetailsFixture(t, func(d *FuryaContractDetails) {
 				d.RegisteredPrivileges = []RegisteredPrivilege{{Position: 1, PrivilegeType: "unknown"}}
 			}),
 			expErr: true,
 		},
 		"empty callback": {
-			src: TgradeContractDetailsFixture(t, func(d *TgradeContractDetails) {
+			src: FuryaContractDetailsFixture(t, func(d *FuryaContractDetails) {
 				d.RegisteredPrivileges = []RegisteredPrivilege{{Position: 1}}
 			}),
 			expErr: true,
 		},
 		"invalid callback position": {
-			src: TgradeContractDetailsFixture(t, func(d *TgradeContractDetails) {
+			src: FuryaContractDetailsFixture(t, func(d *FuryaContractDetails) {
 				d.RegisteredPrivileges = []RegisteredPrivilege{{Position: math.MaxUint8 + 1, PrivilegeType: "begin_blocker"}}
 			}),
 			expErr: true,
 		},
 		"empty callback position": {
-			src: TgradeContractDetailsFixture(t, func(d *TgradeContractDetails) {
+			src: FuryaContractDetailsFixture(t, func(d *FuryaContractDetails) {
 				d.RegisteredPrivileges = []RegisteredPrivilege{{PrivilegeType: "begin_blocker"}}
 			}),
 			expErr: true,

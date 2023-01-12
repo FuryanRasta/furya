@@ -24,10 +24,10 @@ import (
 	"github.com/spf13/cobra"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/confio/tgrade/x/twasm/client/cli"
-	"github.com/confio/tgrade/x/twasm/keeper"
-	"github.com/confio/tgrade/x/twasm/simulation"
-	"github.com/confio/tgrade/x/twasm/types"
+	"github.com/furyanrasta/furya/x/twasm/client/cli"
+	"github.com/furyanrasta/furya/x/twasm/keeper"
+	"github.com/furyanrasta/furya/x/twasm/simulation"
+	"github.com/furyanrasta/furya/x/twasm/types"
 )
 
 var (

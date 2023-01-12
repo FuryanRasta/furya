@@ -4,11 +4,11 @@ import (
 	cryptotypes "github.com/cosmos/cosmos-sdk/crypto/types"
 	"github.com/cosmos/cosmos-sdk/types/errors"
 
-	"github.com/confio/tgrade/x/poe/types"
+	"github.com/furyanrasta/furya/x/poe/types"
 )
 
 // ValidatorUpdateSudoMsg callback message sent to a contract.
-// See https://github.com/confio/tgrade-contracts/blob/main/packages/bindings/src/sudo.rs
+// See https://github.com/furyanrasta/furya-contracts/blob/main/packages/bindings/src/sudo.rs
 type ValidatorUpdateSudoMsg struct {
 	/// This will be delivered after everything.
 	/// The data in the Response is (JSON?) encoded diff to the validator set

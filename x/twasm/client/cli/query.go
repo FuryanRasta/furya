@@ -9,7 +9,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/spf13/cobra"
 
-	"github.com/confio/tgrade/x/twasm/types"
+	"github.com/furyanrasta/furya/x/twasm/types"
 )
 
 func GetQueryCmd() *cobra.Command {

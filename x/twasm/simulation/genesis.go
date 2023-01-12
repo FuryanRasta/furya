@@ -6,7 +6,7 @@ import (
 	wasmtypes "github.com/CosmWasm/wasmd/x/wasm/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 
-	"github.com/confio/tgrade/x/twasm/types"
+	"github.com/furyanrasta/furya/x/twasm/types"
 )
 
 // RandomizedGenState  generates a random GenesisState for wasm

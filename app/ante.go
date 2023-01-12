@@ -13,14 +13,14 @@ import (
 	ibcante "github.com/cosmos/ibc-go/v3/modules/core/ante"
 	ibcCoreKeeper "github.com/cosmos/ibc-go/v3/modules/core/keeper"
 
-	"github.com/confio/tgrade/x/globalfee"
-	"github.com/confio/tgrade/x/poe"
-	poekeeper "github.com/confio/tgrade/x/poe/keeper"
-	poetypes "github.com/confio/tgrade/x/poe/types"
+	"github.com/furyanrasta/furya/x/globalfee"
+	"github.com/furyanrasta/furya/x/poe"
+	poekeeper "github.com/furyanrasta/furya/x/poe/keeper"
+	poetypes "github.com/furyanrasta/furya/x/poe/types"
 )
 
 // HandlerOptions extend the SDK's AnteHandler options by requiring the IBC
-// channel keeper and additional wasm + tgrade types
+// channel keeper and additional wasm + furya types
 type HandlerOptions struct {
 	AccountKeeper   ante.AccountKeeper
 	BankKeeper      poetypes.BankKeeper

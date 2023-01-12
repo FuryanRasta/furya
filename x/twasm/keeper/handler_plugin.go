@@ -15,17 +15,17 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	poetypes "github.com/confio/tgrade/x/poe/types"
-	"github.com/confio/tgrade/x/twasm/contract"
-	"github.com/confio/tgrade/x/twasm/types"
+	poetypes "github.com/furyanrasta/furya/x/poe/types"
+	"github.com/furyanrasta/furya/x/twasm/contract"
+	"github.com/furyanrasta/furya/x/twasm/types"
 )
 
-// TgradeWasmHandlerKeeper defines a subset of Keeper
-type TgradeWasmHandlerKeeper interface {
+// FuryaWasmHandlerKeeper defines a subset of Keeper
+type FuryaWasmHandlerKeeper interface {
 	IsPrivileged(ctx sdk.Context, contract sdk.AccAddress) bool
 	appendToPrivilegedContracts(ctx sdk.Context, privilegeType types.PrivilegeType, contractAddress sdk.AccAddress) (uint8, error)
 	removePrivilegeRegistration(ctx sdk.Context, privilegeType types.PrivilegeType, pos uint8, contractAddr sdk.AccAddress) bool
-	setContractDetails(ctx sdk.Context, contract sdk.AccAddress, details *types.TgradeContractDetails) error
+	setContractDetails(ctx sdk.Context, contract sdk.AccAddress, details *types.FuryaContractDetails) error
 	GetContractInfo(ctx sdk.Context, contractAddress sdk.AccAddress) *wasmtypes.ContractInfo
 }
 
@@ -44,26 +44,26 @@ type ConsensusParamsUpdater interface {
 	StoreConsensusParams(ctx sdk.Context, cp *abci.ConsensusParams)
 }
 
-var _ wasmkeeper.Messenger = TgradeHandler{}
+var _ wasmkeeper.Messenger = FuryaHandler{}
 
-// TgradeHandler is a custom message handler plugin for wasmd.
-type TgradeHandler struct {
+// FuryaHandler is a custom message handler plugin for wasmd.
+type FuryaHandler struct {
 	cdc                    codec.Codec
-	keeper                 TgradeWasmHandlerKeeper
+	keeper                 FuryaWasmHandlerKeeper
 	bankKeeper             bankKeeper
 	govRouter              govtypes.Router
 	consensusParamsUpdater ConsensusParamsUpdater
 }
 
-// NewTgradeHandler constructor
-func NewTgradeHandler(
+// NewFuryaHandler constructor
+func NewFuryaHandler(
 	cdc codec.Codec,
-	keeper TgradeWasmHandlerKeeper,
+	keeper FuryaWasmHandlerKeeper,
 	bankKeeper bankKeeper,
 	consensusParamsUpdater ConsensusParamsUpdater,
 	govRouter govtypes.Router,
-) *TgradeHandler {
-	return &TgradeHandler{
+) *FuryaHandler {
+	return &FuryaHandler{
 		cdc:                    cdc,
 		keeper:                 keeper,
 		govRouter:              restrictParamsDecorator(govRouter),
@@ -73,7 +73,7 @@ func NewTgradeHandler(
 }
 
 // DispatchMsg handles wasmVM message for privileged contracts
-func (h TgradeHandler) DispatchMsg(ctx sdk.Context, contractAddr sdk.AccAddress, _ string, msg wasmvmtypes.CosmosMsg) ([]sdk.Event, [][]byte, error) {
+func (h FuryaHandler) DispatchMsg(ctx sdk.Context, contractAddr sdk.AccAddress, _ string, msg wasmvmtypes.CosmosMsg) ([]sdk.Event, [][]byte, error) {
 	if msg.Custom == nil {
 		return nil, nil, wasmtypes.ErrUnknownMsg
 	}
@@ -82,7 +82,7 @@ func (h TgradeHandler) DispatchMsg(ctx sdk.Context, contractAddr sdk.AccAddress,
 	}
 	em := sdk.NewEventManager()
 	ctx = ctx.WithEventManager(em)
-	var tMsg contract.TgradeMsg
+	var tMsg contract.FuryaMsg
 	if err := tMsg.UnmarshalWithAny(msg.Custom, h.cdc); err != nil {
 		return nil, nil, sdkerrors.Wrap(sdkerrors.ErrJSONUnmarshal, err.Error())
 	}
@@ -112,13 +112,13 @@ func (h TgradeHandler) DispatchMsg(ctx sdk.Context, contractAddr sdk.AccAddress,
 }
 
 // handle register/ unregister privilege messages
-func (h TgradeHandler) handlePrivilege(ctx sdk.Context, contractAddr sdk.AccAddress, msg *contract.PrivilegeMsg) error {
+func (h FuryaHandler) handlePrivilege(ctx sdk.Context, contractAddr sdk.AccAddress, msg *contract.PrivilegeMsg) error {
 	contractInfo := h.keeper.GetContractInfo(ctx, contractAddr)
 	if contractInfo == nil {
 		return sdkerrors.Wrap(wasmtypes.ErrNotFound, "contract info")
 	}
 
-	var details types.TgradeContractDetails
+	var details types.FuryaContractDetails
 	if err := contractInfo.ReadExtension(&details); err != nil {
 		return err
 	}
@@ -159,7 +159,7 @@ func (h TgradeHandler) handlePrivilege(ctx sdk.Context, contractAddr sdk.AccAddr
 }
 
 // handle gov proposal execution
-func (h TgradeHandler) handleGovProposalExecution(ctx sdk.Context, contractAddr sdk.AccAddress, exec *contract.ExecuteGovProposal) error {
+func (h FuryaHandler) handleGovProposalExecution(ctx sdk.Context, contractAddr sdk.AccAddress, exec *contract.ExecuteGovProposal) error {
 	if err := h.assertHasPrivilege(ctx, contractAddr, types.PrivilegeTypeGovProposalExecutor); err != nil {
 		return err
 	}
@@ -179,7 +179,7 @@ func (h TgradeHandler) handleGovProposalExecution(ctx sdk.Context, contractAddr 
 }
 
 // handle mint token message
-func (h TgradeHandler) handleMintToken(ctx sdk.Context, contractAddr sdk.AccAddress, mint *contract.MintTokens) ([]sdk.Event, error) {
+func (h FuryaHandler) handleMintToken(ctx sdk.Context, contractAddr sdk.AccAddress, mint *contract.MintTokens) ([]sdk.Event, error) {
 	if err := h.assertHasPrivilege(ctx, contractAddr, types.PrivilegeTypeTokenMinter); err != nil {
 		return nil, err
 	}
@@ -212,7 +212,7 @@ func (h TgradeHandler) handleMintToken(ctx sdk.Context, contractAddr sdk.AccAddr
 }
 
 // handle the consensus parameters update message
-func (h TgradeHandler) handleConsensusParamsUpdate(ctx sdk.Context, contractAddr sdk.AccAddress, pUpdate *contract.ConsensusParamsUpdate) ([]sdk.Event, error) {
+func (h FuryaHandler) handleConsensusParamsUpdate(ctx sdk.Context, contractAddr sdk.AccAddress, pUpdate *contract.ConsensusParamsUpdate) ([]sdk.Event, error) {
 	if err := h.assertHasPrivilege(ctx, contractAddr, types.PrivilegeConsensusParamChanger); err != nil {
 		return nil, err
 	}
@@ -248,7 +248,7 @@ func mergeConsensusParamsUpdate(src *abci.ConsensusParams, delta *contract.Conse
 }
 
 // handle delegate token message
-func (h TgradeHandler) handleDelegate(ctx sdk.Context, contractAddr sdk.AccAddress, delegate *contract.Delegate) ([]sdk.Event, error) {
+func (h FuryaHandler) handleDelegate(ctx sdk.Context, contractAddr sdk.AccAddress, delegate *contract.Delegate) ([]sdk.Event, error) {
 	if err := h.assertHasPrivilege(ctx, contractAddr, types.PrivilegeDelegator); err != nil {
 		return nil, err
 	}
@@ -276,7 +276,7 @@ func (h TgradeHandler) handleDelegate(ctx sdk.Context, contractAddr sdk.AccAddre
 }
 
 // handle undelegate token message
-func (h TgradeHandler) handleUndelegate(ctx sdk.Context, contractAddr sdk.AccAddress, undelegate *contract.Undelegate) ([]sdk.Event, error) {
+func (h FuryaHandler) handleUndelegate(ctx sdk.Context, contractAddr sdk.AccAddress, undelegate *contract.Undelegate) ([]sdk.Event, error) {
 	if err := h.assertHasPrivilege(ctx, contractAddr, types.PrivilegeDelegator); err != nil {
 		return nil, err
 	}
@@ -304,13 +304,13 @@ func (h TgradeHandler) handleUndelegate(ctx sdk.Context, contractAddr sdk.AccAdd
 }
 
 // assertHasPrivilege helper to assert that the contract has the required privilege
-func (h TgradeHandler) assertHasPrivilege(ctx sdk.Context, contractAddr sdk.AccAddress, requiredPrivilege types.PrivilegeType) error {
+func (h FuryaHandler) assertHasPrivilege(ctx sdk.Context, contractAddr sdk.AccAddress, requiredPrivilege types.PrivilegeType) error {
 	contractInfo := h.keeper.GetContractInfo(ctx, contractAddr)
 	if contractInfo == nil {
 		return sdkerrors.Wrap(wasmtypes.ErrNotFound, "contract info")
 	}
 
-	var details types.TgradeContractDetails
+	var details types.FuryaContractDetails
 	if err := contractInfo.ReadExtension(&details); err != nil {
 		return err
 	}

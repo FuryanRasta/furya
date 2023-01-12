@@ -1,10 +1,10 @@
 package v2
 
 import (
-	"github.com/confio/tgrade/app/upgrades"
+	"github.com/furyanrasta/furya/app/upgrades"
 )
 
-// UpgradeName defines the on-chain upgrade name for the Tgrade v2 upgrade.
+// UpgradeName defines the on-chain upgrade name for the Furya v2 upgrade.
 const UpgradeName = "v2"
 
 var Upgrade = upgrades.Upgrade{

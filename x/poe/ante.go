@@ -8,8 +8,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/auth/ante"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
-	"github.com/confio/tgrade/x/poe/keeper"
-	"github.com/confio/tgrade/x/poe/types"
+	"github.com/furyanrasta/furya/x/poe/keeper"
+	"github.com/furyanrasta/furya/x/poe/types"
 )
 
 // DeductFeeDecorator deducts fees from the first signer of the tx

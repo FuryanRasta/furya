@@ -11,7 +11,7 @@ import (
 	"github.com/tidwall/gjson"
 	"github.com/tidwall/sjson"
 
-	poetypes "github.com/confio/tgrade/x/poe/types"
+	poetypes "github.com/furyanrasta/furya/x/poe/types"
 )
 
 // SetPoEParamsMutator set params in genesis

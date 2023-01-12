@@ -3,7 +3,7 @@
 package globalfee
 
 import (
-	"github.com/confio/tgrade/x/globalfee/types"
+	"github.com/furyanrasta/furya/x/globalfee/types"
 )
 
 const (

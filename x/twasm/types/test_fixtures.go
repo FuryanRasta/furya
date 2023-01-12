@@ -111,9 +111,9 @@ func ContractFixture(t *testing.T, mutators ...func(contract *Contract)) Contrac
 	return c
 }
 
-func TgradeContractDetailsFixture(t *testing.T, mutators ...func(d *TgradeContractDetails)) TgradeContractDetails {
+func FuryaContractDetailsFixture(t *testing.T, mutators ...func(d *FuryaContractDetails)) FuryaContractDetails {
 	t.Helper()
-	d := TgradeContractDetails{
+	d := FuryaContractDetails{
 		RegisteredPrivileges: []RegisteredPrivilege{{
 			Position:      1,
 			PrivilegeType: "begin_blocker",

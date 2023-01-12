@@ -17,7 +17,7 @@ import (
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 	dbm "github.com/tendermint/tm-db"
 
-	"github.com/confio/tgrade/x/globalfee/types"
+	"github.com/furyanrasta/furya/x/globalfee/types"
 )
 
 func TestGlobalMinimumChainFeeAnteHandler(t *testing.T) {

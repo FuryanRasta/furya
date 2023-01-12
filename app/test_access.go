@@ -15,10 +15,10 @@ import (
 
 type TestSupport struct {
 	t   *testing.T
-	app *TgradeApp
+	app *FuryaApp
 }
 
-func NewTestSupport(t *testing.T, app *TgradeApp) *TestSupport {
+func NewTestSupport(t *testing.T, app *FuryaApp) *TestSupport {
 	return &TestSupport{t: t, app: app}
 }
 

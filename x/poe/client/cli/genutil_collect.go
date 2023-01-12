@@ -8,7 +8,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	poeclient "github.com/confio/tgrade/x/poe/client"
+	poeclient "github.com/furyanrasta/furya/x/poe/client"
 
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"

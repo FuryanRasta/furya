@@ -21,7 +21,7 @@ import (
 	cfg "github.com/tendermint/tendermint/config"
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	"github.com/confio/tgrade/x/poe/types"
+	"github.com/furyanrasta/furya/x/poe/types"
 )
 
 // AddGenTxsToGenesisFile collects and adds the gentx to the app state

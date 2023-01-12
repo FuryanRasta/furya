@@ -14,9 +14,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 
-	"github.com/confio/tgrade/app/params"
-	"github.com/confio/tgrade/x/poe/keeper"
-	"github.com/confio/tgrade/x/poe/types"
+	"github.com/furyanrasta/furya/app/params"
+	"github.com/furyanrasta/furya/x/poe/keeper"
+	"github.com/furyanrasta/furya/x/poe/types"
 )
 
 // Simulation operation weights constants

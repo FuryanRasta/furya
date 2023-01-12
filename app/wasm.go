@@ -10,16 +10,16 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 
-	poewasm "github.com/confio/tgrade/x/poe/wasm"
-	twasmkeeper "github.com/confio/tgrade/x/twasm/keeper"
-	twasmtypes "github.com/confio/tgrade/x/twasm/types"
+	poewasm "github.com/furyanrasta/furya/x/poe/wasm"
+	twasmkeeper "github.com/furyanrasta/furya/x/twasm/keeper"
+	twasmtypes "github.com/furyanrasta/furya/x/twasm/types"
 )
 
 func SetupWasmHandlers(
 	cdc codec.Codec,
 	bankKeeper twasmtypes.BankKeeper,
 	govRouter govtypes.Router,
-	twasmKeeper twasmkeeper.TgradeWasmHandlerKeeper,
+	twasmKeeper twasmkeeper.FuryaWasmHandlerKeeper,
 	poeKeeper poewasm.ViewKeeper,
 	consensusParamsUpdater twasmkeeper.ConsensusParamsUpdater,
 ) []wasmkeeper.Option {
@@ -39,7 +39,7 @@ func SetupWasmHandlers(
 			}),
 			nested,
 			// append our custom message handler
-			twasmkeeper.NewTgradeHandler(cdc, twasmKeeper, bankKeeper, consensusParamsUpdater, govRouter),
+			twasmkeeper.NewFuryaHandler(cdc, twasmKeeper, bankKeeper, consensusParamsUpdater, govRouter),
 		)
 	})
 	return []wasm.Option{
