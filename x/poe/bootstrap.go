@@ -23,17 +23,17 @@ var (
 	tg4Stake []byte
 	//go:embed contract/tg4_mixer.wasm
 	tg4Mixer []byte
-	//go:embed contract/furya_valset.wasm
+	//go:embed contract/tgrade_valset.wasm
 	tgValset []byte
-	//go:embed contract/furya_trusted_circle.wasm
+	//go:embed contract/tgrade_trusted_circle.wasm
 	tgTrustedCircles []byte
-	//go:embed contract/furya_oc_proposals.wasm
+	//go:embed contract/tgrade_oc_proposals.wasm
 	tgOCGovProposalsCircles []byte
-	//go:embed contract/furya_community_pool.wasm
+	//go:embed contract/tgrade_community_pool.wasm
 	tgCommunityPool []byte
-	//go:embed contract/furya_validator_voting.wasm
+	//go:embed contract/tgrade_validator_voting.wasm
 	tgValidatorVoting []byte
-	//go:embed contract/furya_ap_voting.wasm
+	//go:embed contract/tgrade_ap_voting.wasm
 	tgArbiterPool []byte
 	//go:embed contract/version.txt
 	contractVersion string

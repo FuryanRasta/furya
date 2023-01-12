@@ -13,7 +13,7 @@ import (
 	"github.com/furyanrasta/furya/x/poe/contract"
 )
 
-//go:embed furya_trusted_circle.wasm
+//go:embed tgrade_trusted_circle.wasm
 var tgTrustedCircles []byte
 
 func TestInitTrustedCircle(t *testing.T) {

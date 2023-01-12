@@ -21,7 +21,7 @@ import (
 	"github.com/furyanrasta/furya/x/poe/types"
 )
 
-//go:embed furya_validator_voting.wasm
+//go:embed tgrade_validator_voting.wasm
 var validatorVotingContract []byte
 
 func TestValidatorsGovProposal(t *testing.T) {
