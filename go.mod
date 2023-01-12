@@ -1,4 +1,4 @@
-module github.com/confio/tgrade
+module github.com/furyanrasta/furya
 
 go 1.18
 
@@ -28,6 +28,8 @@ require (
 	google.golang.org/grpc v1.49.0
 	google.golang.org/protobuf v1.28.1
 	gopkg.in/yaml.v2 v2.4.0
+	github.com/confio/tgrade v1.0.1
+
 )
 
 require (
